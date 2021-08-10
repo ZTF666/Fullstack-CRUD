@@ -69,8 +69,8 @@ $ npm start
 
 #### Config File location :
 
-📦server-api
-┣ 📂config
+📦server-api  
+┣ 📂config  
 ┃ ┗ 📜config.json
 
 <p>Just edit these fields with your config</p>
@@ -86,9 +86,9 @@ $ npm start
 
 <p>This project only uses a single table/model which is USER, but you can add as many as you wish by creating models in the models folders :  </p>
 
-📦server-api
-┣ 📂models
-┃ ┣ 📜index.js
+📦server-api  
+┣ 📂models  
+┃ ┣ 📜index.js  
 ┃ ┗ 📜User.js
 
 <p>Check out the sequelize documentation for the syntax here : <a href="http://sequelize.org" target="_">Sequelize</a></p>
