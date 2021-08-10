@@ -34,7 +34,7 @@ Features implemented :
 ### Demo :
 
 <div align="center">
-    <img src="https://firebasestorage.googleapis.com/v0/b/stocking-pictures.appspot.com/o/images%2Fdemo-crud.gif?alt=media&token=ab77d48f-854d-46b4-a3b7-3ff38893eb2a" alt="demo" />
+    <img src="demo.gif" alt="demo" />
 </div>
 
 ### Client Side
