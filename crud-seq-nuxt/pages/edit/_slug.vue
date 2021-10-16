@@ -29,7 +29,9 @@
 
         <!-- end alert -->
 
-
+            <center>
+            <h1>EDIT USER</h1>
+            </center>
         <v-form  ref="form" v-model="valid" lazy-validation  > 
 
           <v-row>
@@ -72,13 +74,10 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
-
-         async asyncData({ params }){
-         let base_url='http://localhost:3001/byid/'
-
-         const User = await axios.get(base_url+params.slug)
+         async asyncData({$axios, params }){
+         const User = await $axios.$get('get/'+params.slug)
          return {User }
      },
 data: () => ({
@@ -109,7 +108,7 @@ data: () => ({
       async UpdateData(){
         //   the body could be constructed outside of the request if that's how you roll 
         // i like my shit to be this way lol
-             await axios.put(this.base_url+'/edit/'+this.User.data.id,{
+             await this.$axios.$put('/edit/'+this.User.id,{
                   	"fname":this.firstname,
                     "lname":this.lastname,
                     "email":this.email,
@@ -142,10 +141,10 @@ data: () => ({
         this.$refs.form.resetValidation()
       },
       gettingDataReady(){
-      this.firstname=this.User.data.fname
-      this.lastname=this.User.data.lname
-      this.number=this.User.data.number
-      this.email=this.User.data.email
+      this.firstname=this.User.fname
+      this.lastname=this.User.lname
+      this.number=this.User.number
+      this.email=this.User.email
       }
 
   },

@@ -1,69 +1,65 @@
 <template>
-        <v-container class="up">
-          <v-layout row wrap class="d-flex justify-center">
-          <v-flex xs12 sm12 md12>
-             <v-row class="d-flex justify-center">
-              <div>
-                            <!-- alert -->
-                        <div>
-                            <v-alert
-                              v-model="alertup"
-                              dismissible
-                              color="red"
-                              border="left"
-                              elevation="2"
-                              colored-border
-                              icon="mdi-alert-circle"
-                            >
-                              User Deleted Successfully .
-                            </v-alert>
-                        </div>
-                            <!-- end alert -->
-                        <div >
-                              <v-img :src="User.data.image" :aspect-ratio="16 / 9">
-                              <template v-slot:placeholder>
-                                <v-row  class="fill-height ma-0" align="center" justify="center" >
-                                  <v-progress-circular indeterminate color="grey lighten-5"
-                                  ></v-progress-circular>
-                                </v-row>
-                              </template>
-                              </v-img>
-                              <h1>First Name : <small class="data"> {{User.data.fname}}</small></h1>
-                              <h1>Last Name : <small class="data"> {{User.data.lname}}</small> </h1>
-                              <h1>Email : <small class="data"> {{User.data.email}}</small> </h1>
-                              <h1>Phone : <small class="data"> {{User.data.number}}</small> </h1>
-                              <v-btn @click="edit(User.data.id)" color="green">Edit</v-btn>
-                              <v-btn @click="deleteUser(User.data.id)" color="red">Delete</v-btn>
-                        </div>
-              </div>
-             </v-row>
-          </v-flex>
-          </v-layout>
-        </v-container>
+  <v-main class="up">
+  <div>
+  <!-- alert -->
+  <div>
+    <v-alert  v-model="alertup" dismissible
+      color="red" border="left" elevation="2"
+      colored-border icon="mdi-alert-circle" >
+      User Deleted Successfully .
+    </v-alert>
+  </div>
+   <!-- end alert -->
+   <center> <h1>USER DATA</h1> </center>
+
+    <v-card class="mx-auto mt-15" max-width="400" >
+    <v-img
+      class="white--text align-end"
+      height="300px"
+      :src="User.image"
+    >
+    </v-img>
+
+    <v-card-subtitle class="pb-0 mb-5">
+      <div><h1>ID :  <span class="data"> {{User.id}}</span></h1></div>
+    </v-card-subtitle>
+
+    <v-card-text class="text--primary mt-2">
+      <div><h1>First Name :  <span class="data"> {{User.fname}}</span></h1></div>
+    </v-card-text>
+    <v-card-text class="text--primary mt-2">
+      <div><h1>Last Name :  <span class="data"> {{User.lname}}</span></h1></div>
+    </v-card-text>
+    <v-card-text class="text--primary mt-2">
+      <div><h1>E-mail :  <span class="data"> {{User.email}}</span></h1></div>
+    </v-card-text>
+    <v-card-text class="text--primary mt-2">
+      <div><h1>Phone :  <span class="data"> {{User.number}}</span></h1></div>
+    </v-card-text>
+    <v-card-actions class="justify-center">
+      <v-btn  nuxt :to="'/edit/'+User.id" color="green">Edit</v-btn>
+      <v-btn @click="deleteUser(User.id)" color="red">Delete</v-btn>
+    </v-card-actions>
+  </v-card>
+</div>
+            
+</v-main>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-     async asyncData({ params }){
-         let base_url='http://localhost:3001/byid/'
-
-         const User = await axios.get(base_url+params.slug)
-         return {User }
+     async asyncData({ $axios,params }){
+         const User = await $axios.$get('get/'+params.slug)
+         return { User }
      },
-  
   data(){
       return{
-      delete_url:"http://localhost:3001/delete/",
       alertup:false
   }},
   methods:{
-      edit(id){
-          this.$router.push('/edit/'+id)
-      },
       async deleteUser(id){
           this.alertup=true
-         await  axios.delete(this.delete_url+id).then(()=>{
+         await  this.$axios.$delete('delete/'+id).then(()=>{
              setTimeout(() => {
                  this.alertup=false
                  this.$router.push('/')

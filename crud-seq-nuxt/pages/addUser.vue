@@ -14,6 +14,9 @@
               Please Make Sure All The Required Fields Are Filled Out ! Thank you 🙏 .
             </v-alert>
         </div>
+        <center>
+          <h1>ADD USER</h1>
+        </center>
         <!-- end alert -->
     <v-form  ref="form" v-model="valid" lazy-validation  > 
       <v-row>

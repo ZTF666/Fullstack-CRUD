@@ -11,6 +11,7 @@ Features implemented :
 | fetch all users                     | ✅     |
 | fetch user by id                    | ✅     |
 | edit user                           | ✅     |
+| edit user's image                   | ❌     |
 | delete user                         | ✅     |
 | upload picture to firestore storage | ✅     |
 | get url from storage into db        | ✅     |
@@ -99,8 +100,8 @@ $ npm start
 
 #### Config File location :
 
-📦firestore
-┣ 📜config.js
+📦firestore  
+┣ 📜config.js  
 ┗ 📜storage.js
 
 <p>Just edit these fields with your config</p>

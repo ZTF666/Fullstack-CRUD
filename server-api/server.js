@@ -1,10 +1,8 @@
 const express = require("express")
 const cors = require('cors')
-const mysql = require ("mysql2")
 
 const app = express()
-const db = require("./models")
-const {User} = require('./models')
+const db = require("./app/models")
 
 app.use(express.json())
 app.use(cors())
@@ -14,59 +12,13 @@ app.use(function(req,res,next){
     next();
 })
 
+/**Importing routes**/
+const usersRouter = require('./app/routes/User.route')
+/*********************/
 
-
-// fetch all
-app.get('/select',async (req,res)=>{
-    const listofusers = await User.findAll()
-    res.json(listofusers)
-})
-// push
-app.post('/insert',async (req,res)=>{
-
-    const user = req.body
-    await User.create(user)
-    res.json(user)
-
-})
-// delete
-app.delete('/delete/:id',async (req,res)=>{
-    const id = req.params.id
-    await User.destroy({
-        where:{
-            id:id
-        }
-    })
-    res.json('Deleted')
-
-
-})
-// fetch by id
-app.get('/byid/:id',async (req,res)=>{
-    const id = req.params.id
-    const user = await User.findByPk(id)
-    res.json(user)
-
-})
-
-// Update user 
-
-app.put('/edit/:id',async(req,res)=>{
-    const id = req.params.id
-    const {fname,lname,number,email} = req.body
-    const user = await User.update({
-        fname:fname,
-        lname:lname,
-        email:email,
-        number:number
-    },
-    {where:{id:id}})
-    res.json(user)
-})
-
-
-
-
+/**Initializing routes**/
+app.use('/api/users/',usersRouter)
+/************************/
 
 
 db.sequelize.sync().then(()=>{

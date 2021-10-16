@@ -1,0 +1,36 @@
+GET http://localhost:3001/api/users/get
+
+### 
+
+GET http://localhost:3001/api/users/get/21
+
+### 
+
+POST http://localhost:3001/api/users/add HTTP/1.1
+content-type: application/json
+
+{
+    "fname":"ZTF",
+    "lname":"FTZ",
+    "email":"test@test.jp",
+    "number":999666111,
+    "image":"test.jpg"
+}
+
+### 
+
+PUT http://localhost:3001/api/users/edit/23 HTTP/1.1
+content-type: application/json
+
+{
+    "fname":"ZFT",
+    "lname":"FZT",
+    "email":"test@test.ma",
+    "number":444222888
+}
+
+### 
+
+DELETE  http://localhost:3001/api/users/delete/23 HTTP/1.1
+
+### 

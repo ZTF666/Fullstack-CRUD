@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <center><h1>DATA</h1></center>
+    <center><h1>ALL DATA</h1></center>
     <v-main>
       <v-container>
         <v-row>
@@ -44,7 +44,7 @@
                     </v-list-item>
                   </v-card-actions>
                   <v-card-actions class="justify-center">
-                    <v-btn  @click="OpenProfile(frag.id)">View Profile</v-btn>
+                    <v-btn   nuxt :to="'/user/'+frag.id">View </v-btn>
                   </v-card-actions>
             </v-card>
           </v-col>
@@ -52,34 +52,16 @@
       </v-container>
     </v-main>
     <!-- floaty button/image for decoration -->
-    <!-- <v-img class="float" src="https://ztf-shop.web.app/9.png" height="80" width="80" /> -->
+    <v-img class="float" src="https://ztf-shop.web.app/9.png" height="80" width="80" />
   </v-app>
 </template>
 
 <script>
-import axios from 'axios'
 export default {
-  
-  data(){
-    return{
-      data:[],
-      base_url:'http://localhost:3001/select'
-    }
-    
-  },
-  methods:{
-     async fetchData(){
-          let response = await axios.get( this.base_url  )
-          this.data=response.data
-    },
-    OpenProfile(id){
-      this.$router.push('/user/'+id)
-    }
-  },
-  created(){
-    this.fetchData()
-  },
-
+  async asyncData({ $axios }) {
+  const data = await $axios.$get('get')
+  return { data }
+}
 
 }
 </script>
