@@ -11,14 +11,14 @@ exports.create = (req, res) => {
     }
     const user = req.body
 
-        Users.create(user).then(data=>res.send(data))
+        Users.create(user).then(data=>res.status(201).send(data))
          .catch(err=> res.status(500).send(err.message || "Error while creating User..."))
 
 }
 // fetch all users
 exports.findAll=(req,res)=>{
     Users.findAll()
-    .then(data=>res.send(data))
+    .then(data=>res.status(200).send(data))
     .catch(err=>res.status(500).send(err.message || 'Error while retrieving data...'))
 }
 // fetch user by id
@@ -26,7 +26,7 @@ exports.findOne=(req,res)=>{
     const id = req.params.id
     Users.findByPk(id)
     .then(data=>{
-        if(data){res.send(data)}
+        if(data){res.status(200).send(data)}
         else{res.status(404).send('Does not exist...')}
     })
     .catch(err=>res.status(500).send(err.message || 'Error ! try again later...'))
@@ -44,7 +44,7 @@ exports.update=(req,res)=>{
     {where:{id:id}})
     .then((data)=>{
         if(data == 1){
-            res.send({message:"User data was updated successfully !"})
+            res.status(201).send({message:"User data was updated successfully !"})
         }else{
             res.status(404).send({message:"Error ! empty Body or Cannot update data .User : "+id+" does not exist."})
         }
@@ -57,7 +57,7 @@ exports.delete=(req,res)=>{
     const id = req.params.id 
     Users.destroy({where:{id:id}})
     .then(data=>{
-        if(data){res.send('Data deleted successfully')}
+        if(data){res.status(204).send('Data deleted successfully')}
         else{res.status(404).send('Data with this id does not exist ')}
     })
     .catch(err=>res.status(500).send(err.message || "Error while deleting data"))
